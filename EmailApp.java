@@ -31,11 +31,11 @@ import java.util.Scanner;
 
 public class EmailApp {
 
-
+    // CLASS VARIABLE(s) declaration(s).
+    static Scanner input = new Scanner(System.in);
     public static void main(String[] args){
 
         // INSTANCE VARIABLE(s) declaration(s)
-        Scanner input = new Scanner(System.in);
         String firstName;
         String lastName;
 
@@ -53,5 +53,24 @@ public class EmailApp {
         person.changePassword("iThinkNot!");
         person.changeDepartment();
         person.showInfo();
+    }
+
+
+    // I want to be able to use a method like this to be able to create
+        // Email objects and have the reference variable name be whatever I pass into the parameter.
+            // Example: I want to create an Email object "Bob".
+            // I want to create that with: generateEmailObject(Bob);
+            // Then I could use methods like: Bob.showInfo();
+    public static void generateEmailObject(Email objectName){
+
+        String firstName;
+        String lastName;
+
+        System.out.print("Please enter your first name: ");
+        firstName = input.nextLine();
+        System.out.print("Please enter your last name: ");
+        lastName = input.nextLine();
+
+        objectName = new Email(firstName, lastName);
     }
 }
