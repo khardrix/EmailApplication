@@ -27,6 +27,7 @@ package emailApp;
 
 // IMPORTS of needed tools and plug-ins.
 import java.util.Random;
+import java.util.Scanner;
 
 
 public class Email {
@@ -35,28 +36,48 @@ public class Email {
     private String lastName;
     private String department;    // Sales, Development and Accounting.
     private String password;
-    private int mailboxCapacity;
+    private int mailboxCapacity = 500;
     private String email;
-    private String newPassword;
-    private String emailAternate;
-
-
-    public Email(String firstName, String lastName, String department){
-
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.department = department;
-        password = generatePassword();
-        email = firstName + "." + lastName + "@" + department + ".company.com";
-    }
+    private String emailAlternate;
 
 
     public Email(String firstName, String lastName){
 
         this.firstName = firstName;
         this.lastName = lastName;
-        password = generatePassword();
-        email = firstName + "." + lastName + "@company.com";
+        this.password = generatePassword();
+        this.department = setDepartment();
+        this.email = setEmail();
+    }
+
+
+    private String setDepartment(){
+
+        Scanner input = new Scanner(System.in);
+
+        System.out.print("\n1 for Sales " +
+                "\n2 for Development " +
+                "\n3 for Accounting " +
+                "\n0 for none " +
+                "\nPlease enter the number that corresponds to your department: ");
+        String departChoice = input.nextLine();
+        System.out.println();
+
+        while(!departChoice.matches("[0123]")){
+            System.out.print("\nInvalid input! " +
+                    "\n1 for Sales " +
+                    "\n2 for Development " +
+                    "\n3 for Accounting " +
+                    "\n0 for none " +
+                    "\nPlease enter the number that corresponds to your department: ");
+            departChoice = input.nextLine();
+            System.out.println();
+        }
+
+        if(departChoice.equals("1")){ return "Sales"; }
+        else if(departChoice.equals("2")){ return "Development"; }
+        else if(departChoice.equals("3")){ return "Accounting"; }
+        else { return ""; }
     }
 
 
@@ -103,9 +124,53 @@ public class Email {
     }
 
 
-    public void setPassword(String password){
+    private String setEmail(){
+
+        String companySuffix = "google.com";
+        boolean hasDepartment = this.department.length() >= 1;
+        if(hasDepartment)
+            return firstName.toLowerCase() + "." + lastName.toLowerCase() + "@" +
+                    department.toLowerCase() + "." + companySuffix;
+        else
+            return firstName.toLowerCase() + "." + lastName.toLowerCase() + "@" + "." + companySuffix;
+    }
+
+
+    public void changePassword(String password){
 
         this.password = password;
+    }
+
+
+    public void changeDepartment(){
+
+        Scanner input = new Scanner(System.in);
+
+        System.out.print("\n1 for Sales " +
+                "\n2 for Development " +
+                "\n3 for Accounting " +
+                "\n0 for none " +
+                "\nPlease enter the number that corresponds to your department: ");
+        String departChoice = input.nextLine();
+        System.out.println();
+
+        while(!departChoice.matches("[0123]")){
+            System.out.print("\nInvalid input! " +
+                    "\n1 for Sales " +
+                    "\n2 for Development " +
+                    "\n3 for Accounting " +
+                    "\n0 for none " +
+                    "\nPlease enter the number that corresponds to your department: ");
+            departChoice = input.nextLine();
+            System.out.println();
+        }
+
+        if(departChoice.equals("1")){ this.department = "Sales"; }
+        else if(departChoice.equals("2")){ this.department = "Development"; }
+        else if(departChoice.equals("3")){ this.department = "Accounting"; }
+        else { this.department = ""; }
+
+        this.email = setEmail();
     }
 
 
@@ -115,9 +180,9 @@ public class Email {
     }
 
 
-    public void setEmailAternate(String email){
+    public void setEmailAlternate(String email){
 
-        this.emailAternate = email;
+        this.emailAlternate = email;
     }
 
 
@@ -133,8 +198,36 @@ public class Email {
     }
 
 
+    public String getPassword(){
+
+        return password;
+    }
+
+
+    public String getDepartment(){
+
+        return department;
+    }
+
+
     public int getMailboxCapacity(){
 
         return mailboxCapacity;
+    }
+
+
+    public String getEmailAlternate(){
+
+        if(emailAlternate == null){ return "N / A"; }
+        else{ return emailAlternate; }
+    }
+
+
+    public void showInfo(){
+
+        System.out.println("Name: " + getName() +
+                "\nDepartment: " + getDepartment() + "\nEmail: " + getEmail() +
+                "\nAlternate Email: " + getEmailAlternate() + "\nPassword: " + getPassword() +
+                "\nMailbox Capacity: " + getMailboxCapacity() + "\n");
     }
 }
