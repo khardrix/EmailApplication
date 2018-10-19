@@ -33,17 +33,16 @@ public class EmailApp {
 
     // CLASS VARIABLE(s) declaration(s).
     static Scanner input = new Scanner(System.in);
+    static String firstName, lastName;
+
+
     public static void main(String[] args){
 
         // INSTANCE VARIABLE(s) declaration(s)
-        String firstName;
-        String lastName;
 
-        System.out.print("Please enter your first name: ");
-        firstName = input.nextLine();
-        System.out.print("Please enter your last name: ");
-        lastName = input.nextLine();
-        Email person = new Email(firstName, lastName);
+
+
+        Email person = new Email(getFirstName(), getLastName());
 
 
         person.showInfo();
@@ -61,16 +60,32 @@ public class EmailApp {
             // Example: I want to create an Email object "Bob".
             // I want to create that with: generateEmailObject(Bob);
             // Then I could use methods like: Bob.showInfo();
-    public static void generateEmailObject(Email objectName){
+//    public static void generateEmailObject(Email objectName){
+//
+//        String firstName;
+//        String lastName;
+//
+//        System.out.print("Please enter your first name: ");
+//        firstName = input.nextLine();
+//        System.out.print("Please enter your last name: ");
+//        lastName = input.nextLine();
+//
+//        objectName = new Email(firstName, lastName);
+//    }
 
-        String firstName;
-        String lastName;
+
+    public static String getFirstName(){
 
         System.out.print("Please enter your first name: ");
         firstName = input.nextLine();
+        return firstName;
+    }
+
+
+    public static String getLastName(){
+
         System.out.print("Please enter your last name: ");
         lastName = input.nextLine();
-
-        objectName = new Email(firstName, lastName);
+        return lastName;
     }
 }
