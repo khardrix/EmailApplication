@@ -41,10 +41,7 @@ public class EmailApp {
         // INSTANCE VARIABLE(s) declaration(s)
 
 
-
-        Email person = new Email(getFirstName(), getLastName());
-
-
+        Email person = generateEmailObject();
         person.showInfo();
 
         person.setMailboxCapacity(100);
@@ -55,29 +52,19 @@ public class EmailApp {
     }
 
 
-    // I want to be able to use a method like this to be able to create
-        // Email objects and have the reference variable name be whatever I pass into the parameter.
-            // Example: I want to create an Email object "Bob".
-            // I want to create that with: generateEmailObject(Bob);
-            // Then I could use methods like: Bob.showInfo();
-//    public static void generateEmailObject(Email objectName){
-//
-//        String firstName;
-//        String lastName;
-//
-//        System.out.print("Please enter your first name: ");
-//        firstName = input.nextLine();
-//        System.out.print("Please enter your last name: ");
-//        lastName = input.nextLine();
-//
-//        objectName = new Email(firstName, lastName);
-//    }
+    public static Email generateEmailObject(){
+
+        firstName = getFirstName();
+        lastName = getLastName();
+
+        return new Email(firstName, lastName);
+    }
 
 
     public static String getFirstName(){
 
         System.out.print("Please enter your first name: ");
-        firstName = input.nextLine();
+        String firstName = input.nextLine();
         return firstName;
     }
 
@@ -85,7 +72,7 @@ public class EmailApp {
     public static String getLastName(){
 
         System.out.print("Please enter your last name: ");
-        lastName = input.nextLine();
+        String lastName = input.nextLine();
         return lastName;
     }
 }
